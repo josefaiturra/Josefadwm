@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TokyoNoodles — B-10 Gestión de platos (skeleton)</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:12px; }
+  *{ box-sizing:border-box; } /* BOX MODEL */
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+  /* Header */
+  .header{
+    border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+    display:flex; align-items:center; justify-content:space-between; /* FLEX */
+  }
+  .small{ color:#666; font-size:.9rem; }
+  .tag{ padding:2px 8px; border:1px dashed #aaa; border-radius:999px; font-size:.8rem; }
+
+  /* Secciones */
+  .section{ border:var(--border) dashed #9e9e9e; border-radius:var(--radius); background:#fff; padding:var(--gap); margin-bottom:var(--gap); }
+
+  /* Ficha plato */
+  .plate{ display:grid; grid-template-columns: 260px 1fr; gap:var(--gap); } /* GRID */
+  .img{ width:100%; height:200px; border:1px dashed #aaa; border-radius:10px; background:#eee; }
+  .btn{ padding:10px 16px; border:1px solid #444; border-radius:999px; background:#eee; cursor:pointer; }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; } /* FLEX */
+
+  /* Tabs categorías */
+  .tabs{ display:flex; gap:10px; margin:10px 0 var(--gap); flex-wrap:wrap; }
+  .tab{ padding:6px 12px; border:1px dashed #aaa; border-radius:8px; background:#fff; }
+  .tab.active{ background:#eef3ff; border-color:#7aa2ff; font-weight:700; }
+
+  /* Grilla catálogo */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:var(--gap); }
+  .card{ border:1px dashed #ccc; border-radius:10px; padding:12px; background:#fff; display:flex; flex-direction:column; gap:8px; }
+
+  /* Form de nuevo plato (maqueta) */
+  .form{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  .form label{ display:flex; flex-direction:column; gap:6px; }
+  .form input, .form textarea{ padding:8px 10px; border:1px solid #bbb; border-radius:8px; background:#fafafa; }
+  .form textarea{ min-height:84px; resize:vertical; }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="row">
+      <strong>TokyoNoodles</strong>
+      <span class="tag">B-10 • Gestión de platos</span>
+      <span class="tag">wireframe</span>
+    </div>
+    <div class="small">HTML5 + Grid + Flex + Box Model</div>
+  </header>
+
+  <!-- ========== Escenario 1: Creación de un nuevo plato ========== -->
+  <section class="section" aria-labelledby="esc1">
+    <h2 id="esc1">Escenario 1 — Crear nuevo plato</h2>
+    <div class="plate" style="margin-bottom:14px;">
+      <div class="img" aria-hidden="true"></div>
+      <div>
+        <h3>Cha shu ramen</h3>
+        <p><b>Descripción:</b> Sopa a base de miso con tallarines, huevo, cebollín, choclito, sésamo y Cha Shu (cerdo) — Tonkotsu.</p>
+        <div class="row">
+          <div><b>Precio:</b> $10.980</div>
+          <button class="btn" type="button">Añadir</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (maqueta) Formulario del panel de administración -->
+    <div class="form" style="margin-top:8px;">
+      <label>Nombre<input type="text" value="Cha shu ramen"></label>
+      <label>Precio<input type="text" value="10980"></label>
+      <label style="grid-column:1 / -1;">Descripción<textarea>Texto descriptivo del plato…</textarea></label>
+      <div class="row" style="grid-column:1 / -1; justify-content:flex-end;">
+        <button class="btn" type="button">Guardar plato</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px;">Catálogo — categoría Ramen</h3>
+    <div class="tabs">
+      <span class="tab">Entradas</span>
+      <span class="tab active">Ramen</span>
+      <span class="tab">Gyosas</span>
+      <span class="tab">Noodles</span>
+      <span class="tab">Promociones</span>
+      <span class="tab">Tonkotsu</span>
+    </div>
+
+    <!-- La grilla ya muestra el nuevo plato -->
+    <div class="grid">
+      <article class="card">
+        <div class="img"></div>
+        <strong>Cha shu ramen</strong>
+        <small>Descripción: Tonkotsu</small>
+        <span>$10.980</span>
+      </article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$9.980</span></article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$11.780</span></article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$12.980</span></article>
+    </div>
+  </section>
+
+  <!-- ========== Escenario 2: Desactivar un plato ========== -->
+  <section class="section" aria-labelledby="esc2">
+    <h2 id="esc2">Escenario 2 — Desactivar plato</h2>
+
+    <!-- Ficha del plato con botón Desactivar -->
+    <div class="plate" style="margin-bottom:10px;">
+      <div class="img"></div>
+      <div>
+        <h3>Cha shu ramen</h3>
+        <p><b>Descripción:</b> Sopa a base de miso… Tonkotsu.</p>
+        <div class="row">
+          <div><b>Precio:</b> $10.980</div>
+          <button class="btn" type="button">Desactivar</button>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:16px;">Catálogo — Ramen (después de desactivar)</h3>
+    <div class="tabs">
+      <span class="tab">Entradas</span>
+      <span class="tab active">Ramen</span>
+      <span class="tab">Gyosas</span>
+      <span class="tab">Noodles</span>
+      <span class="tab">Promociones</span>
+    </div>
+
+    <!-- Grilla sin el plato desactivado -->
+    <div class="grid">
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$9.980</span></article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$11.780</span></article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$12.980</span></article>
+      <article class="card"><div class="img"></div><strong>Ramen</strong><small>Descripción</small><span>$10.500</span></article>
+    </div>
+  </section>
+</body>
+</html>

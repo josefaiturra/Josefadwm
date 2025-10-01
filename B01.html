@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TokyoNoodles — B-01 Registro de Usuario (skeleton)</title>
+  <style>
+    :root { --gap:16px; --border:2px; --radius:12px; }
+    * { box-sizing:border-box; } /* BOX MODEL */
+    body { margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+    /* Header */
+    .header{
+      border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+      display:flex; align-items:center; justify-content:space-between; /* FLEX */
+    }
+    .row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; } /* FLEX */
+    .tag{ font-size:.75rem; padding:2px 8px; border:1px dashed #aaa; border-radius:999px; }
+    .small{ font-size:.85rem; color:#555; }
+
+    /* Layout principal: formulario | ejemplos/privado */
+    .layout{
+      display:grid; grid-template-columns: 420px 1fr; gap:var(--gap); /* GRID SYSTEM */
+    }
+    @media (max-width: 960px){ .layout{ grid-template-columns: 1fr; } }
+
+    /* Card base */
+    .card{ border:var(--border) dashed #9e9e9e; border-radius:var(--radius); padding:var(--gap); background:#fff; }
+
+    /* Formulario */
+    .form{ display:flex; flex-direction:column; gap:12px; } /* FLEX */
+    .form label{ display:flex; flex-direction:column; gap:6px; } /* FLEX */
+    .form input{
+      padding:10px 12px; border:1px solid #ccc; border-radius:8px; background:#fafafa;
+    }
+    .btn{ padding:10px 16px; border:1px solid #666; border-radius:999px; background:#eee; cursor:pointer; }
+
+    /* API box (decorativo) */
+    .api{ background:#fff9f5; border-color:#e0b9a1; }
+
+    /* Modales simples */
+    .modal{
+      width:min(420px, 92vw); margin:12px 0; padding:16px;
+      border:2px dashed #bdbdbd; border-radius:12px; background:#fafafa;
+      display:flex; flex-direction:column; gap:12px; align-items:center; text-align:center; /* FLEX */
+    }
+
+    /* Área privada (placeholder de redirección) */
+    .private{
+      min-height:160px; display:flex; align-items:center; justify-content:center; /* FLEX */
+      border:1px dashed #cfcfcf; border-radius:10px; background:#fff;
+      font-weight:700; color:#333;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="row">
+      <strong>TokyoNoodles</strong>
+      <span class="tag">B-01 • Registro de usuario</span>
+      <span class="tag">wireframe</span>
+    </div>
+    <div class="small">HTML5 + Grid + Flex + Box Model</div>
+  </header>
+
+  <main class="layout">
+    <!-- Columna izquierda: Formulario de registro -->
+    <section class="card">
+      <h2>Registro</h2>
+      <form class="form" action="#" method="post">
+        <label>Email
+          <input type="email" placeholder="ana@example.com" />
+        </label>
+        <label>Contraseña
+          <input type="password" placeholder="********" />
+        </label>
+        <div><button class="btn" type="button">Registrar</button></div>
+      </form>
+
+      <!-- Escenario 2: email ya registrado (modal) -->
+      <div class="modal">
+        <strong>El email ya está en uso</strong>
+        <button class="btn" type="button">OK</button>
+      </div>
+
+      <!-- Escenario 3: contraseña no cumple política (modal) -->
+      <div class="modal">
+        <strong>La contraseña no cumple los requisitos</strong>
+        <button class="btn" type="button">OK</button>
+      </div>
+
+      <!-- Caja API (decorativa, según el diagrama) -->
+      <div class="card api" style="margin-top:12px;">
+        <h3>API/Usuario</h3>
+        <ul style="margin:0;">
+          <li>Email: <code>string</code></li>
+          <li>Pass: <code>string</code></li>
+          <li><code>Registrar(email, pass): response</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Columna derecha: Resultado de “registro exitoso” -->
+    <section class="card">
+      <h2>Escenario 1 — Registro exitoso</h2>
+      <div class="private">Redirección al área privada</div>
+    </section>
+  </main>
+</body>
+</html>

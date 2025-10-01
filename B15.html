@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte Mensual - Skeleton</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header, nav, main, footer {
+      border: 1px solid #000;   /* Box Model: se marcan bloques */
+      padding: 10px;
+      margin: 5px;
+    }
+
+    /* Grid principal */
+    .container {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 1fr;
+      height: 100vh;
+    }
+
+    header {
+      background: #eee;
+    }
+
+    nav {
+      display: flex;            /* Flexbox */
+      justify-content: space-between;
+      background: #ddd;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .tabla {
+      border: 1px dashed #555;
+      height: 300px; /* caja simulada */
+    }
+
+    .acciones {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8em;
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TokyoNoodles - Reporte Mensual</h1>
+    </header>
+
+    <nav>
+      <div>Menú</div>
+      <div>Administración</div>
+      <div>Usuario</div>
+    </nav>
+
+    <main class="content">
+      <section class="filtros">
+        <p>[Selector Meses]</p>
+      </section>
+
+      <section class="tabla">
+        <p>[Tabla de Reportes]</p>
+      </section>
+
+      <section class="acciones">
+        <button>Exportar Excel</button>
+        <button>Exportar PDF</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 TokyoNoodles - Skeleton</p>
+    </footer>
+  </div>
+</body>
+</html>

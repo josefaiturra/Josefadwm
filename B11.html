@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TokyoNoodles — B-11 Gestión de inventario (skeleton)</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:12px; }
+  *{ box-sizing:border-box; } /* BOX MODEL */
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+  /* Header */
+  .header{
+    border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+    display:flex; align-items:center; justify-content:space-between; /* FLEX */
+  }
+  .row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .tag{ font-size:.75rem; padding:2px 8px; border:1px dashed #aaa; border-radius:999px; }
+  .small{ font-size:.85rem; color:#555; }
+
+  /* Sección */
+  .section{ border:var(--border) dashed #9e9e9e; border-radius:var(--radius); background:#fff; padding:var(--gap); margin-bottom:var(--gap); }
+
+  /* Tabla inventario */
+  table{ width:100%; border-collapse:separate; border-spacing:0; }
+  th,td{ border:1px dashed #ddd; padding:10px; text-align:left; }
+  th{ background:#f0f1f4; }
+  .right{ text-align:right; }
+  .center{ text-align:center; }
+
+  /* Botones / controles */
+  .actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; } /* FLEX */
+  .btn{ padding:10px 16px; border:1px solid #444; border-radius:999px; background:#eee; cursor:pointer; }
+  .btn.small{ padding:6px 10px; }
+
+  /* Grid 2 columnas para “Antes / Después” */
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
+  @media (max-width: 900px){ .grid-2{ grid-template-columns:1fr; } }
+
+  /* Modal */
+  .modal{
+    width:min(460px, 92vw); margin:0 auto; border:2px dashed #c33; border-radius:var(--radius);
+    padding:16px; background:#fff; text-align:center;
+    display:flex; flex-direction:column; gap:12px; align-items:center; /* FLEX */
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="row">
+    <strong>TokyoNoodles</strong>
+    <span class="tag">B-11 • Gestión de inventario</span>
+    <span class="tag">wireframe</span>
+  </div>
+  <div class="small">HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<!-- =================== Tabla de inventario =================== -->
+<section class="section" aria-labelledby="inv">
+  <div class="actions" style="justify-content:space-between;">
+    <h2 id="inv" style="margin:0;">Inventario</h2>
+    <button class="btn" type="button">Añadir ingrediente</button>
+  </div>
+
+  <table aria-label="inventario">
+    <thead>
+      <tr>
+        <th style="width:40%;">Ingrediente</th>
+        <th style="width:15%;" class="right">Cantidad</th>
+        <th style="width:20%;">Categoría</th>
+        <th style="width:15%;" class="center">Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Tonkotsu</td><td class="right">50</td><td>Carne</td><td class="center">sí</td></tr>
+      <tr><td>Huesos de pollo</td><td class="right">25</td><td>Carne</td><td class="center">sí</td></tr>
+      <tr><td>Jengibre fresco</td><td class="right">0</td><td>Vegetal</td><td class="center">no</td></tr>
+      <tr><td>Kansui</td><td class="right">20</td><td>Fideos</td><td class="center">sí</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================== Escenario 1: actualización automática =================== -->
+<section class="section" aria-labelledby="esc1">
+  <h2 id="esc1">Escenario 1 — Actualización automática de inventario</h2>
+  <p class="small">Ejemplo visual: venta de un plato que consume <b>0.2 kg</b> de “Carne de cerdo”.</p>
+
+  <div class="grid-2">
+    <div>
+      <h3>Antes</h3>
+      <table>
+        <thead><tr><th>Ingrediente</th><th class="right">Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td>Carne de cerdo</td><td class="right">100.0 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Después</h3>
+      <table>
+        <thead><tr><th>Ingrediente</th><th class="right">Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td>Carne de cerdo</td><td class="right">99.8 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Escenario 2: verificación de disponibilidad =================== -->
+<section class="section" aria-labelledby="esc2">
+  <h2 id="esc2">Escenario 2 — Verificación “Sin stock” antes de la venta</h2>
+  <p class="small">Ejemplo: intento de comprar “Ramen con Fideos Especiales” mientras <b>Fideos Especiales = 0</b>.</p>
+
+  <div class="modal" role="dialog" aria-labelledby="ttl" aria-describedby="msg">
+    <h3 id="ttl" style="margin:0;">Sin stock</h3>
+    <p id="msg" style="margin:0;">Este producto no se puede vender porque el ingrediente <b>Fideos Especiales</b> no está disponible.</p>
+    <button class="btn" type="button">OK</button>
+  </div>
+</section>
+</body>
+</html>

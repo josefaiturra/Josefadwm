@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TokyoNoodles — B-05 Gestión de datos e historial</title>
+<style>
+  :root { --gap:16px; --border:2px; --radius:12px; }
+  *{ box-sizing:border-box; } /* BOX MODEL */
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f7f8fb; }
+
+  .header{ border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+           display:flex; align-items:center; justify-content:space-between; } /* FLEX */
+  .row{ display:flex; gap:8px; align-items:center; }
+  .tag{ font-size:.75rem; border:1px dashed #aaa; border-radius:999px; padding:2px 8px; }
+  .small{ font-size:.85rem; color:#555; }
+
+  .layout{ display:grid; grid-template-columns:260px 1fr; gap:var(--gap); } /* GRID */
+  @media(max-width:960px){ .layout{ grid-template-columns:1fr; } }
+
+  .card{ border:var(--border) dashed #ccc; border-radius:var(--radius); background:#fff; padding:var(--gap); }
+
+  /* Perfil lateral */
+  .profile{ text-align:center; }
+  .profile img{ width:80px; height:80px; border:1px dashed #888; border-radius:50%; margin-bottom:8px; }
+  .menu{ display:flex; flex-direction:column; gap:8px; } /* FLEX */
+  .menu a{ color:#346; font-size:.95rem; }
+
+  /* Información de cliente */
+  .form{ display:flex; flex-direction:column; gap:12px; } /* FLEX */
+  .form label{ display:flex; flex-direction:column; gap:4px; }
+  .form input{ padding:8px 10px; border:1px solid #bbb; border-radius:8px; background:#fafafa; }
+
+  /* Modal confirmación */
+  .modal{ margin-top:16px; border:2px dashed #aaa; border-radius:var(--radius); padding:16px; background:#fafafa;
+          display:flex; flex-direction:column; gap:12px; align-items:center; text-align:center; } /* FLEX */
+  .row.center{ justify-content:center; }
+  .btn{ padding:6px 12px; border:1px solid #666; border-radius:999px; background:#eee; cursor:pointer; }
+
+  /* Tabla historial */
+  table{ width:100%; border-collapse:separate; border-spacing:0; }
+  th,td{ border:1px dashed #ddd; padding:8px; text-align:left; }
+  th{ background:#f1f1f1; }
+  .link{ color:#06c; text-decoration:underline; font-size:.9rem; }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="row">
+    <strong>TokyoNoodles</strong>
+    <span class="tag">B-05 • Datos & Historial</span>
+    <span class="tag">wireframe</span>
+  </div>
+  <div class="small">HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<main class="layout">
+  <!-- Columna izquierda -->
+  <aside class="card profile">
+    <img alt="avatar" />
+    <h3>Juan Pérez</h3>
+    <nav class="menu">
+      <a href="#">Historial de compras</a>
+      <a href="#">Configuración</a>
+      <a href="#">Información</a>
+      <a href="#">Cerrar Sesión</a>
+    </nav>
+  </aside>
+
+  <!-- Columna derecha -->
+  <section class="card">
+    <h2>Escenario 1 — Información</h2>
+    <form class="form">
+      <label>Email:
+        <input type="email" value="juan@example.com" />
+      </label>
+      <label>Contraseña:
+        <input type="password" value="**********" />
+      </label>
+      <label>Número:
+        <input type="text" value="9 5495 8624" />
+      </label>
+      <label>Dirección:
+        <input type="text" value="Antonio Varas 880" />
+      </label>
+    </form>
+
+    <!-- Modal de confirmación -->
+    <div class="modal">
+      <p>¿Desea cambiar dirección?</p>
+      <div class="row center">
+        <button class="btn" type="button">OK</button>
+        <button class="btn" type="button">Cancel</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Historial de compras -->
+<section class="card" style="margin-top:20px;">
+  <h2>Escenario 2 — Historial de Compras</h2>
+  <table>
+    <thead>
+      <tr><th>N° Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>001</td><td>23/03/2025</td><td>Entregado</td><td>$27.900</td><td><span class="link">Detalle</span></td></tr>
+      <tr><td>002</td><td>08/06/2025</td><td>Entregado</td><td>$37.700</td><td><span class="link">Detalle</span></td></tr>
+      <tr><td>003</td><td>23/08/2025</td><td>Entregado</td><td>$17.500</td><td><span class="link">Detalle</span></td></tr>
+    </tbody>
+  </table>
+</section>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TokyoNoodles — B-03 Recuperación y Perfil (skeleton)</title>
+  <style>
+    :root { --gap:16px; --border:2px; --radius:12px; }
+    * { box-sizing:border-box; }                         /* BOX MODEL */
+    body { margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+    /* Header */
+    .header{
+      border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+      display:flex; align-items:center; justify-content:space-between; /* FLEX */
+    }
+    .row{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }  /* FLEX */
+    .tag{ font-size:.75rem; padding:2px 8px; border:1px dashed #aaa; border-radius:999px; }
+    .small{ font-size:.85rem; color:#555; }
+
+    /* Secciones */
+    .section{ border:var(--border) dashed #9e9e9e; border-radius:var(--radius); padding:var(--gap); background:#fff; margin-bottom:var(--gap); }
+
+    /* Form & cards */
+    .card{ border:1px dashed #cfcfcf; border-radius:12px; padding:16px; background:#fff; }
+    .form{ display:flex; flex-direction:column; gap:12px; }              /* FLEX */
+    .form label{ display:flex; flex-direction:column; gap:6px; }         /* FLEX */
+    .form input{ padding:10px 12px; border:1px solid #ccc; border-radius:8px; background:#fafafa; }
+    .btn{ padding:10px 16px; border:1px solid #666; border-radius:999px; background:#eee; cursor:pointer; }
+    .links{ font-size:.9rem; color:#345; display:flex; gap:10px; flex-wrap:wrap; }  /* FLEX */
+
+    /* Layouts */
+    .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap:var(--gap); }        /* GRID SYSTEM */
+    @media (max-width: 960px){ .grid-2{ grid-template-columns:1fr; } }
+
+    /* API box (decorativo) */
+    .api{ background:#fff9f5; border-color:#e0b9a1; }
+
+    /* “Email” de restablecimiento */
+    .mail{ width:min(560px, 100%); margin-inline:auto; text-align:left; }
+
+    /* Perfil */
+    .perfil{ display:grid; grid-template-columns: 260px 1fr; gap:var(--gap); }      /* GRID */
+    @media (max-width: 900px){ .perfil{ grid-template-columns:1fr; } }
+    .menu{ border:1px dashed #ddd; border-radius:10px; padding:12px; background:#fafafa; }
+    .menu ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+    .content{ border:1px dashed #ddd; border-radius:10px; padding:16px; background:#fff; min-height:160px; }
+    .orders{ display:grid; gap:8px; }
+    .orders .row{ justify-content:space-between; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="row">
+      <strong>TokyoNoodles</strong>
+      <span class="tag">B-03 • Recuperación de contraseña y perfil</span>
+      <span class="tag">wireframe</span>
+    </div>
+    <div class="small">HTML5 + Grid + Flex + Box Model</div>
+  </header>
+
+  <!-- ============== BLOQUE 1: Login inicial con “Olvidé mi contraseña” ============== -->
+  <section class="section" aria-labelledby="login-1">
+    <h2 id="login-1">Inicio Sesión</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <form class="form" action="#" method="post">
+          <label>Email:
+            <input type="email" placeholder="ana@example.com" />
+          </label>
+          <label>Contraseña:
+            <input type="password" placeholder="********" />
+          </label>
+          <div><button class="btn" type="button">Iniciar Sesión</button></div>
+          <div class="links">
+            <span>Olvidé mi contraseña</span>
+            <span>¿No tienes cuenta? Regístrate</span>
+          </div>
+        </form>
+
+        <!-- API/Usuario (decorativo) -->
+        <div class="card api" style="margin-top:12px;">
+          <h3>API/Usuario</h3>
+          <ul style="margin:0;">
+            <li>Email: <code>string</code></li>
+            <li>Pass: <code>string</code></li>
+            <li><code>Registrar(email, pass): response</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- “Correo” con enlace de restablecimiento -->
+      <div class="card mail">
+        <h3>Email</h3>
+        <p><strong>Reestablecer contraseña TokyoNoodles</strong></p>
+        <p><a href="#" class="btn" role="button">Reestablecer</a></p>
+        <!-- (placeholder) al “hacer clic”, el flujo llevaría a la pantalla de crear nueva contraseña -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== BLOQUE 2: Login nuevamente (después de restablecer) ============== -->
+  <section class="section" aria-labelledby="login-2">
+    <h2 id="login-2">Iniciar sesión con la nueva contraseña</h2>
+    <div class="card" style="max-width:560px;">
+      <form class="form" action="#" method="post">
+        <label>Email:
+          <input type="email" placeholder="ana@example.com" />
+        </label>
+        <label>Contraseña:
+          <input type="password" placeholder="********" />
+        </label>
+        <div><button class="btn" type="button">Iniciar Sesión</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============== BLOQUE 3: Mi Perfil (historial de pedidos) ============== -->
+  <section class="section" aria-labelledby="perfil">
+    <h2 id="perfil">Mi Perfil</h2>
+    <div class="perfil">
+      <aside class="menu">
+        <ul>
+          <li><strong>Mis Pedidos</strong></li>
+          <li>Configuración</li>
+          <li>Información</li>
+          <li>Cerrar sesión</li>
+        </ul>
+      </aside>
+
+      <div class="content">
+        <h3>Historial de pedidos</h3>
+        <div class="orders">
+          <div class="row"><span>ORD-2025-045</span><span>12/02 — 3 ítems — $25.900</span></div>
+          <div class="row"><span>ORD-2025-031</span><span>02/02 — 1 ítem — $5.000</span></div>
+          <div class="row"><span>ORD-2025-018</span><span>25/01 — 2 ítems — $10.500</span></div>
+          <!-- … más filas de ejemplo -->
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

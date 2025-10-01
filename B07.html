@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>B-07 Personalización de Productos</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:10px; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, sans-serif; background:#f8f9fb; }
+
+  /* Encabezado */
+  .header{ border:var(--border) dashed #bbb; border-radius:var(--radius); padding:var(--gap);
+           display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--gap); }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .tag{ border:1px dashed #999; border-radius:999px; padding:2px 8px; font-size:.8rem; }
+  .small{ font-size:.85rem; color:#555; }
+
+  /* Contenedor producto */
+  .product{ display:grid; grid-template-columns:240px 1fr; gap:var(--gap); border:var(--border) dashed #ccc; 
+            border-radius:var(--radius); padding:var(--gap); background:#fff; }
+
+  .img{ width:100%; height:200px; background:#eee; border:1px dashed #aaa; border-radius:8px; }
+
+  /* Opciones */
+  .options{ display:flex; flex-direction:column; gap:6px; }
+  .option{ display:flex; justify-content:space-between; border:1px dashed #ddd; padding:6px 10px; border-radius:6px; }
+
+  /* Footer producto */
+  .footer{ display:flex; justify-content:space-between; align-items:center; margin-top:var(--gap); }
+  .qty{ display:flex; gap:8px; align-items:center; }
+  .btn{ padding:8px 16px; border:1px solid #444; border-radius:999px; background:#eee; cursor:pointer; }
+
+  /* Modal error */
+  .modal{ width:min(380px,90vw); margin:30px auto; border:2px dashed #c33; border-radius:var(--radius); padding:16px; 
+          background:#fff; text-align:center; }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="row">
+    <strong>TokyoNoodles</strong>
+    <span class="tag">B-07 Personalización</span>
+    <span class="tag">wireframe</span>
+  </div>
+  <div class="small">HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<!-- Escenario 1: selección toppings -->
+<section class="product">
+  <div class="img"></div>
+  <div>
+    <h2>Cha shu ramen</h2>
+    <p>Sopa base de miso con tallarines, huevo, cebollín, choclito, sésamo y Cha Shu (cerdo).</p>
+    <div class="options">
+      <label class="option">1oz salsa picante (+$1.350)<input type="checkbox"></label>
+      <label class="option">Cambiar por fideos arroz (+$2.100)<input type="checkbox"></label>
+      <label class="option">Extra tofu (+$1.500)<input type="checkbox"></label>
+      <label class="option">Extra shiitake (+$1.200)<input type="checkbox"></label>
+      <label class="option">Extra tallarines (+$1.900)<input type="checkbox"></label>
+    </div>
+    <div class="footer">
+      <div class="qty">
+        <button class="btn">-</button>
+        <span>1</span>
+        <button class="btn">+</button>
+      </div>
+      <button class="btn">Agregar — $11.300</button>
+    </div>
+  </div>
+</section>
+
+<!-- Escenario 2: error de opción -->
+<section style="margin-top:40px;">
+  <h2>Validación de opción inválida</h2>
+  <div class="modal">
+    <p><b>Error:</b> Esta opción no está disponible para este ramen.<br>Seleccione otra opción.</p>
+    <button class="btn">OK</button>
+  </div>
+</section>
+</body>
+</html>

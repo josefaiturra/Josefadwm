@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TokyoNoodles — B-06 Catálogo & Filtros</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:10px; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f7f8fb; }
+
+  /* Header */
+  .header{ border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+           display:flex; align-items:center; justify-content:space-between; }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .tag{ border:1px dashed #999; border-radius:999px; padding:2px 8px; font-size:.8rem; }
+  .small{ font-size:.85rem; color:#555; }
+
+  /* Menú principal */
+  nav{ display:flex; gap:10px; margin-bottom:var(--gap); }
+  nav a{ padding:6px 12px; border:1px dashed #aaa; border-radius:6px; background:#fff; font-size:.9rem; }
+
+  /* Catálogo */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:var(--gap); }
+  .card{ border:1px dashed #ccc; border-radius:var(--radius); padding:12px; background:#fff; display:flex; flex-direction:column; gap:8px; }
+  .img{ width:100%; height:120px; border:1px dashed #aaa; border-radius:8px; background:#eee; }
+
+  .search{ margin:var(--gap) 0; display:flex; gap:8px; }
+  .search input{ flex:1; padding:8px; border:1px solid #bbb; border-radius:6px; }
+  .search button{ padding:8px 16px; border:1px solid #444; border-radius:6px; background:#eee; }
+
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="row">
+    <strong>TokyoNoodles</strong>
+    <span class="tag">B-06 • Catálogo y búsqueda</span>
+    <span class="tag">wireframe</span>
+  </div>
+  <div class="small">HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<!-- ====== Catálogo inicial ====== -->
+<section>
+  <h2>Entradas</h2>
+  <nav>
+    <a href="#">Entradas</a>
+    <a href="#">Ramen</a>
+    <a href="#">Gyosas</a>
+    <a href="#">Noodles</a>
+    <a href="#">Promociones</a>
+  </nav>
+  <div class="grid">
+    <div class="card"><div class="img"></div><strong>Allitas barbecue</strong><span>$7.980</span></div>
+    <div class="card"><div class="img"></div><strong>Allitas sal pimienta</strong><span>$7.980</span></div>
+    <div class="card"><div class="img"></div><strong>Dragon Ball</strong><span>$11.780</span></div>
+    <div class="card"><div class="img"></div><strong>Edamame Sake</strong><span>$6.980</span></div>
+    <div class="card"><div class="img"></div><strong>Dumpling Szechuan</strong><span>$8.580</span></div>
+    <div class="card"><div class="img"></div><strong>Karaage pollo</strong><span>$6.980</span></div>
+  </div>
+</section>
+
+<!-- ====== Escenario 1: búsqueda ====== -->
+<section style="margin-top:40px;">
+  <h2>Resultado búsqueda: “tonkotsu”</h2>
+  <div class="search">
+    <input type="text" value="tonkotsu" />
+    <button>Buscar</button>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="img"></div><strong>Ramen Tonkotsu</strong><span>$10.980</span></div>
+    <div class="card"><div class="img"></div><strong>Ramen Tonkotsu</strong><span>$9.980</span></div>
+    <div class="card"><div class="img"></div><strong>Ramen Tonkotsu</strong><span>$11.780</span></div>
+    <div class="card"><div class="img"></div><strong>Ramen Tonkotsu</strong><span>$12.980</span></div>
+  </div>
+</section>
+
+<!-- ====== Escenario 2: filtrado ====== -->
+<section style="margin-top:40px;">
+  <h2>Filtrado: Ramen picante</h2>
+  <nav>
+    <a href="#">Todos</a>
+    <a href="#">Picante</a>
+    <a href="#">Miso</a>
+    <a href="#">Shoyu</a>
+  </nav>
+  <div class="grid">
+    <div class="card"><div class="img"></div><strong>Ramen Picante</strong><span>$9.500</span></div>
+    <div class="card"><div class="img"></div><strong>Ramen Picante</strong><span>$10.500</span></div>
+    <div class="card"><div class="img"></div><strong>Ramen Picante</strong><span>$8.900</span></div>
+  </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>B12 — Validación de pedido y Proceso de pago (skeleton)</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:12px; }
+  *{ box-sizing:border-box; }                  /* BOX MODEL */
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+  /* Header */
+  .header{
+    border:var(--border) dashed #bbb; padding:var(--gap); border-radius:var(--radius); margin-bottom:var(--gap);
+    display:flex; align-items:center; justify-content:space-between;          /* FLEX */
+  }
+  .small{ color:#666; font-size:.9rem; }
+
+  /* Card genérica */
+  .card{ border:var(--border) dashed #9e9e9e; border-radius:var(--radius); background:#fff; padding:var(--gap); }
+
+  /* Carrito */
+  table{ width:100%; border-collapse:separate; border-spacing:0; }
+  th,td{ border:1px dashed #ddd; padding:10px; vertical-align:top; text-align:left; }
+  th{ background:#eff1f4; }
+  .row{ display:flex; gap:12px; align-items:flex-start; }
+  .thumb{ width:86px; height:86px; border:1px dashed #aaa; border-radius:10px; background:#eee; }
+  .rb{ font-weight:800; }
+
+  .layout{ margin-top:var(--gap); display:grid; grid-template-columns: 1fr 320px; gap:var(--gap); } /* GRID */
+  @media (max-width: 920px){ .layout{ grid-template-columns:1fr; } }
+
+  .coupon{ display:flex; flex-direction:column; gap:8px; }                    /* FLEX */
+  .coupon input{ padding:10px; border:1px solid #bbb; border-radius:8px; background:#fafafa; }
+  .btn{ padding:12px 18px; border:1px solid #444; border-radius:999px; background:#eee; cursor:pointer; font-weight:700; }
+  .totals{ border:1px dashed #bbb; border-radius:12px; background:#fff; padding:12px; }
+  .trow{ display:grid; grid-template-columns: 1fr auto; padding:8px 0; }
+  .trow + .trow{ border-top:1px dashed #ddd; }
+
+  /* Modal error */
+  .modal{
+    width:min(420px, 92vw); margin:var(--gap) auto; border:2px dashed #c33; border-radius:var(--radius);
+    padding:16px; background:#fff; text-align:center; display:flex; flex-direction:column; gap:10px; /* FLEX */
+  }
+
+  /* Selección de pago */
+  .paybox{ max-width:520px; margin:var(--gap) auto; }
+  .stack{ display:flex; flex-direction:column; gap:12px; }                    /* FLEX */
+  .btn.blue{ background:#e8f0ff; border-color:#5b78ff; }
+</style>
+</head>
+<body>
+<header class="header">
+  <strong>TokyoNoodles</strong>
+  <div class="small">B12 • Validación de pedido y Proceso de pago — HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<!-- ==================== Carrito ==================== -->
+<section class="card" aria-labelledby="cart">
+  <h2 id="cart" style="margin-top:0;">Carrito</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:58%;">Producto</th><th style="width:14%;">Precio</th><th style="width:14%;">Cant.</th><th style="width:14%;">Subtotal</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="row">
+            <div class="thumb" aria-hidden="true"></div>
+            <div>
+              <div class="rb">Cha Shu Ramen</div>
+              <div style="font-size:.92rem; color:#555;">Sopa a base de miso con tallarines, huevo, cebollín, choclo, sésamo y Cha Shu.</div>
+            </div>
+          </div>
+        </td>
+        <td class="rb">$11.380</td>
+        <td class="rb">1</td>
+        <td class="rb">$11.380</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="layout">
+    <div class="coupon">
+      <label for="cupon">Código de descuento</label>
+      <input id="cupon" type="text" placeholder="Ingresa tu código" />
+      <div><button class="btn" type="button">Pagar</button></div>
+    </div>
+    <div class="totals" aria-label="resumen totales">
+      <div class="trow"><strong>Subtotal</strong><strong>$11.380</strong></div>
+      <div class="trow"><strong>Total</strong><strong>$11.380</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Escenario 1: Falta de stock (bloquea pago) ==================== -->
+<section class="modal" role="dialog" aria-labelledby="errTitle" aria-describedby="errMsg">
+  <h3 id="errTitle" style="margin:0;">Error</h3>
+  <p id="errMsg" style="margin:0;">Falta de stock para uno de los productos del carrito. No es posible continuar con el pago.</p>
+  <button class="btn" type="button">OK</button>
+</section>
+
+<!-- ==================== Escenario 2: Selección de método de pago ==================== -->
+<section class="card paybox" aria-labelledby="pay">
+  <h2 id="pay" style="margin-top:0;">Método de Pago</h2>
+  <div class="stack">
+    <div>Orden n° <strong>100083</strong></div>
+    <div>Despacho: <strong>—</strong></div>
+    <div>Total: <strong>$11.380</strong></div>
+    <button class="btn blue" type="button">Crédito/Débito</button>
+    <!-- (Placeholder) Al continuar, se redirigiría a la pasarela de pago -->
+  </div>
+</section>
+</body>
+</html>

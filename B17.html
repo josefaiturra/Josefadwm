@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>B17 — Seguimiento de Pedido (skeleton)</title>
+<style>
+  :root{ --gap:16px; --border:2px; --radius:12px; }
+  *{ box-sizing:border-box; }                      /* BOX MODEL */
+  body{ margin:0; padding:var(--gap); font-family:system-ui, Segoe UI, Roboto, sans-serif; background:#f6f7fb; }
+
+  /* Header */
+  .header{
+    border:var(--border) dashed #bbb; border-radius:var(--radius);
+    padding:var(--gap); margin-bottom:var(--gap);
+    display:flex; align-items:center; justify-content:space-between; /* FLEX */
+  }
+  .small{ color:#666; font-size:.9rem; }
+
+  /* Grid de tarjetas de estado */
+  .grid{
+    display:grid; grid-template-columns: repeat(3, minmax(260px, 1fr)); gap:var(--gap); /* GRID */
+  }
+  @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+
+  /* Card estado */
+  .card{
+    border:var(--border) dashed #9e9e9e; border-radius:var(--radius); background:#fff;
+    padding:24px; min-height:260px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; /* FLEX */
+    text-align:center;
+  }
+  .badge{ font-weight:800; font-size:1.4rem; }
+  .order{ color:#333; }
+  .circle{
+    width:88px; height:88px; border:2px dashed #7aa2ff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:28px;
+  }
+  .meta{ margin-top:8px; font-size:.9rem; color:#555; }
+  .link{ margin-top:6px; font-size:.92rem; color:#2457ff; }
+
+  /* Bloque “cómo va tu pedido” (opcional) */
+  .timeline{
+    margin-top:var(--gap);
+    border:var(--border) dashed #bbb; border-radius:var(--radius); background:#fff; padding:16px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; /* GRID */
+  }
+  .step{ padding:10px; border:1px dashed #ddd; border-radius:10px; text-align:center; }
+</style>
+</head>
+<body>
+<header class="header">
+  <strong>TokyoNoodles</strong>
+  <div class="small">B17 • Seguimiento de pedido — HTML5 + Grid + Flex + Box Model</div>
+</header>
+
+<main class="grid" aria-label="vistas de estado del pedido">
+  <!-- Vista 1: Va en camino -->
+  <section class="card" aria-labelledby="estado1">
+    <div id="estado1" class="badge">Tu pedido va en camino</div>
+    <div class="order">Orden n°100083</div>
+    <div class="circle">✓</div>
+    <div class="link">Revisa aquí el estado de tu pedido</div>
+  </section>
+
+  <!-- Vista 2: En preparación -->
+  <section class="card" aria-labelledby="estado2">
+    <div id="estado2" class="badge">En preparación</div>
+    <div class="order">Orden n°100083</div>
+    <div class="circle">✓</div>
+    <div class="meta">Actualizado: 21:45<br/>Estado de tu pedido</div>
+  </section>
+
+  <!-- Vista 3: En reparto -->
+  <section class="card" aria-labelledby="estado3">
+    <div id="estado3" class="badge">En reparto</div>
+    <div class="order">Orden n°100083</div>
+    <div class="circle">✓</div>
+    <div class="meta">Actualizado: 22:13<br/>Estado de tu pedido</div>
+  </section>
+</main>
+
+<!-- Línea de tiempo (opcional, estática en el skeleton) -->
+<section class="timeline" aria-label="progreso del pedido">
+  <div class="step"><strong>En preparación</strong><br><small>21:45</small></div>
+  <div class="step"><strong>En reparto</strong><br><small>22:13</small></div>
+  <div class="step"><strong>En camino</strong><br><small>—</small></div>
+</section>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - TokyoNoodles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================= */
+        /* ESTILOS BASE Y PALETA */
+        /* ========================================= */
+        :root {
+            --color-principal: #B31B1B;       /* Rojo Oscuro (Marca/Destacado) */
+            --color-secundario: #2c3e50;      /* Gris Oscuro (Texto principal) */
+            --color-acento: #FFD700;          /* Amarillo Oro (Acentos) */
+            --color-fondo: #f9f9f9;           /* Fondo general */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-secundario);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--color-principal);
+            transition: color 0.3s;
+        }
+
+        /* ========================================= */
+        /* ENCABEZADO (Igual que el Index) */
+        /* ========================================= */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            color: var(--color-principal);
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li a {
+            color: var(--color-secundario);
+            padding: 10px 18px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .user-actions a {
+            color: var(--color-secundario);
+            margin-left: 15px;
+            font-size: 0.9em;
+        }
+        
+        /* Se resalta "Perfil" en la navegación de usuario */
+        .user-actions a.active {
+            font-weight: 700;
+            color: var(--color-principal);
+        }
+
+        /* ========================================= */
+        /* ESTRUCTURA DEL PERFIL */
+        /* ========================================= */
+        .profile-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Barra de Navegación Lateral (Sidebar) */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0; /* Evita que se encoja */
+        }
+        
+        .sidebar h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-principal);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--color-secundario);
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .sidebar ul li a:hover, .sidebar ul li a.active-link {
+            background-color: #ffeaea; /* Fondo muy claro al pasar el ratón */
+            color: var(--color-principal);
+            font-weight: 700;
+        }
+
+        .sidebar .logout {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .sidebar .logout a {
+            color: #888;
+            font-weight: 400;
+            font-size: 0.9em;
+        }
+        
+        /* Contenido Principal del Perfil */
+        .profile-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-content h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-secundario);
+            border-bottom: 3px solid var(--color-acento);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        /* Estilo para los datos clave */
+        .data-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .data-group strong {
+            display: block;
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 3px;
+        }
+        
+        .data-group span {
+            font-size: 1.1em;
+            color: var(--color-secundario);
+        }
+
+        .data-group .btn-edit {
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: var(--color-secundario);
+        }
+        
+        /* Estilos para la sección de pedidos */
+        .order-summary {
+            background-color: var(--color-fondo);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .order-summary h4 {
+            color: var(--color-principal);
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">TokyoNoodles</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="login.html">Iniciar Sesión</a> |
+            <a href="perfil.html" class="active">Perfil</a> |
+            <a href="carrito.html">🛒 Carrito (0)</a>
+        </div>
+    </header>
+
+    <main class="profile-container">
+
+        <aside class="sidebar">
+            <h3>Mi Cuenta</h3>
+            <ul>
+                <li><a href="perfil.html" class="active-link">⭐ Información Personal</a></li>
+                <li><a href="pedidos.html">📦 Mis Pedidos</a></li>
+                <li><a href="direcciones.html">📍 Direcciones de Envío</a></li>
+                <li><a href="metodos-pago.html">💳 Métodos de Pago</a></li>
+                <li><a href="ajustes.html">⚙️ Ajustes de Cuenta</a></li>
+            </ul>
+            <div class="logout">
+                <a href="logout.html">Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <section class="profile-content">
+            <h1>Bienvenido, [Nombre del Cliente]</h1>
+            <p style="margin-bottom: 30px;">Aquí puedes revisar y actualizar tu información personal.</p>
+
+            <div class="data-group">
+                <div>
+                    <strong>Nombre Completo</strong>
+                    <span>Juan Antonio Pérez Sánchez</span>
+                </div>
+                <a href="#" class="btn-edit">Editar</a>
+            </div>
+            
+            <div class="data-group">
+                <div>
+                    <strong>Correo Electrónico</strong>
+                    <span>juan.perez@email.com</span>
+                </div>
+                <a href="#" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="data-group">
+                <div>
+                    <strong>Teléfono</strong>
+                    <span>+56 9 1234 5678</span>
+                </div>
+                <a href="#" class="btn-edit">Editar</a>
+            </div>
+
+            <h2 style="font-family: 'Roboto', sans-serif; color: var(--color-secundario); font-size: 1.5em; margin-top: 40px;">Último Pedido</h2>
+            
+            <div class="order-summary">
+                <h4>Pedido #TN-2025-101</h4>
+                <p>Fecha: 05 de Octubre de 2025</p>
+                <p>Total: **$25.98**</p>
+                <p>Estado: **En Camino 🛵**</p>
+                <a href="pedidos.html" style="color: var(--color-principal); font-weight: 700;">Ver Detalles del Pedido →</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    </body>
+</html>

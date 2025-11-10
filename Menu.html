@@ -4,75 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú - TokyoNoodles</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ESTILOS CSS (Coherentes con el diseño de tu tienda) */
+        /* ESTILOS CSS - CONSISTENTES CON INDEX.HTML */
         :root {
-            --color-principal: #B31B1B;
-            --color-secundario: #2c3e50;
-            --color-acento: #FFD700;
+            --color-principal: #B31B1B;       /* Rojo Oscuro (Marca/Destacado) */
+            --color-secundario: #2c3e50;      /* Gris Oscuro (Texto principal) */
+            --color-acento: #FFD700;          /* Amarillo Oro (Fideos/Acentos) */
             --color-fondo: #f9f9f9;
             --color-seccion: white;
         }
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: var(--color-fondo); color: var(--color-secundario); line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        a { text-decoration: none; color: var(--color-principal); transition: color 0.3s; }
+        a:hover { color: var(--color-secundario); } 
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-secundario);
-            line-height: 1.6;
+        /* HEADER - AJUSTADO AL INDEX.HTML */
+        header { 
+            background-color: white; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            padding: 10px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo a { color: var(--color-principal); font-size: 2.2em; font-weight: 700; letter-spacing: -1px; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+        nav ul li a { color: var(--color-secundario); padding: 10px 18px; font-weight: 500; text-transform: uppercase; font-size: 0.9em; }
+        .user-actions a { color: var(--color-secundario); margin-left: 15px; font-size: 0.9em; }
+        .user-actions a:hover { color: var(--color-principal); }
+        .current-page { 
+            border-bottom: 3px solid var(--color-principal) !important; 
+            color: var(--color-principal) !important;
+        }
+
+        /* MENU HERO */
+        .menu-hero { 
+            text-align: center; 
+            padding: 100px 20px 60px; /* Más padding para impacto visual */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/menu-hero.jpg'); /* NUEVA IMAGEN DE FONDO */
+            background-size: cover;
+            background-position: center;
+            color: white; 
+            margin-bottom: 40px; 
+        }
+        .menu-hero h1 { color: white; font-size: 3.8em; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); }
+        .menu-hero p { font-size: 1.2em; }
+        
+        .menu-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .menu-section { margin-bottom: 60px; }
+        .menu-section h2 { 
+            text-align: center; 
+            font-size: 2.8em; 
+            color: var(--color-principal); 
+            padding-bottom: 10px; 
+            margin-bottom: 40px; 
+            border-bottom: 3px solid var(--color-acento); 
+            display: block; /* Centrar con display: block y text-align: center */
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--color-principal); }
-        a { text-decoration: none; color: var(--color-principal); transition: color 0.3s; }
-
-        header { background-color: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; }
-        .logo a { color: var(--color-principal); font-size: 2.2em; font-weight: 700; }
-        nav ul { list-style: none; display: flex; padding: 0; margin: 0; }
-        nav ul li a { color: var(--color-secundario); padding: 10px 18px; font-weight: 500; text-transform: uppercase; }
-        .user-actions a { color: var(--color-secundario); margin-left: 15px; font-size: 0.9em; }
-
-        .menu-hero { text-align: center; padding: 80px 20px 40px; background-color: var(--color-secundario); color: white; margin-bottom: 40px; }
-        .menu-hero h1 { color: white; font-size: 3.5em; margin-bottom: 5px; }
-        .menu-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .menu-section { margin-bottom: 50px; }
-        .menu-section h2 { text-align: center; font-size: 2.8em; color: var(--color-principal); padding-bottom: 10px; margin-bottom: 30px; border-bottom: 3px solid var(--color-acento); display: inline-block; width: 100%; }
-        
-        .dish-card { display: flex; background-color: var(--color-seccion); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); transition: transform 0.3s; }
-        .dish-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); }
+        /* TARJETA DE PLATO (DISH CARD) - REFINADA */
+        .dish-card { 
+            display: flex; 
+            background-color: var(--color-seccion); 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .dish-card:hover {
+            transform: translateY(-5px); /* Efecto de elevación como en el index */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
         .dish-image { width: 35%; height: 200px; overflow: hidden; border-radius: 10px 0 0 10px; }
         .dish-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .dish-card:hover .dish-image img { transform: scale(1.05); }
-        .dish-info { width: 65%; padding: 20px 30px; display: flex; flex-direction: column; justify-content: center; }
+        .dish-card:hover .dish-image img {
+            transform: scale(1.05); /* Zoom sutil al pasar el mouse */
+        }
+        .dish-info { width: 65%; padding: 20px 30px; display: flex; flex-direction: column; justify-content: space-between; }
         .dish-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-        .dish-header h3 { margin: 0; font-size: 1.8em; color: var(--color-secundario); }
-        .dish-price { font-family: 'Playfair Display', serif; font-size: 1.8em; font-weight: 700; color: var(--color-acento); background-color: var(--color-principal); padding: 5px 15px; border-radius: 5px; line-height: 1; }
-        .btn-add { background-color: var(--color-principal); color: white; padding: 10px 20px; border-radius: 5px; font-weight: 700; text-align: center; width: fit-content; transition: background-color 0.3s; }
-        .btn-add:hover { background-color: #e63946; }
-
-        footer { background-color: var(--color-secundario); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
-        footer a { color: white; opacity: 0.7; margin: 0 10px; }
+        .dish-header h3 { margin: 0; font-size: 1.8em; color: var(--color-principal); }
+        .dish-price { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8em; 
+            font-weight: 700; 
+            color: white; 
+            background-color: var(--color-principal); 
+            padding: 5px 15px; 
+            border-radius: 5px; 
+            line-height: 1; 
+        }
+        .dish-description { margin-top: 5px; margin-bottom: 15px; font-size: 0.95em; }
+        .btn-add { 
+            background-color: var(--color-acento); 
+            color: var(--color-secundario); 
+            padding: 12px 25px; /* Ajuste de padding */
+            border-radius: 5px; 
+            font-weight: 700; 
+            text-align: center; 
+            width: fit-content; 
+            transition: all 0.3s; 
+            margin-top: auto; /* Empuja el botón hacia abajo */
+            font-size: 1em;
+        }
+        .btn-add:hover { background-color: gold; transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+        
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .dish-card { flex-direction: column; }
+            .dish-image, .dish-info { width: 100%; }
+            .dish-image { height: 250px; border-radius: 10px 10px 0 0; }
+            .dish-info { padding: 20px; }
+            .dish-header { flex-direction: column; align-items: center; }
+            .dish-price { margin-top: 10px; }
+            .btn-add { width: 100%; text-align: center; }
+            .menu-hero h1 { font-size: 3em; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <a href="index.html">TokyoNoodles</a>
-        </div>
+        <div class="logo"><a href="index.html">TokyoNoodles</a></div>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="menu.html" style="border-bottom: 2px solid var(--color-principal);">Menú</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="menu.html" class="current-page">Pide Aquí</a></li>
+                <li><a href="ubicacion.html">ubicación</a></li>
             </ul>
         </nav>
         <div class="user-actions">
-            <a href="login.html">Iniciar Sesión</a> |
-            <a href="perfil.html">Perfil</a> |
+            <a href="Inicio Sesion.html">Iniciar Sesión</a> 
+            <a href="perfil.html">Perfil</a>
             <a href="carrito.html">🛒 Carrito (<span id="cart-count">0</span>)</a>
         </div>
     </header>
@@ -84,101 +152,80 @@
         </section>
 
         <div class="menu-container">
-
             <section class="menu-section">
-                <h2>🍲 Ramen Clásico</h2>
-
-                <article class="dish-card" data-id="ramen_tonkotsu" data-name="Tonkotsu Shio Clásico" data-price="12.99">
-                    <div class="dish-image">
-                        <img src="assets/img/tonkotsu-ramen.jpg" alt="Ramen Tonkotsu" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-header">
-                            <h3>Tonkotsu Shio Clásico</h3>
-                            <span class="dish-price">$12.99</span>
-                        </div>
-                        <p class="dish-description">Caldo de cerdo cocido durante 18 horas, con chashu, huevo ajitama y alga nori. Profundidad y cremosidad inigualables.</p>
-                        <a href="#" class="btn-add" 
-                           onclick="addToCart('ramen_tonkotsu', 'Tonkotsu Shio Clásico', 12.99); return false;">
-                           Añadir al Carrito
-                        </a>
+                <h2> Ramen Clásico</h2>
+                
+                <article class="dish-card" data-id="ramen_tonkotsu" data-name="Tonkotsu Shio Clásico" data-price="$14.000">
+                    <div class="dish-image"><img src="img/r1.png" alt="Ramen Tonkotsu"></div> <div class="dish-info">
+                        <div class="dish-header"><h3>Miso Ramen</h3><span class="dish-price">$14.000</span></div>
+                        <p class="dish-description">Caldo consistente de miso, pollo y almeja, chashu de cerdo, ajitama, choclo, nori, cebollín, sésamo y noodles.
+Black: un toque de aceite de ajo carbonizado.
+Spicy Red: un toque de aceite picante.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('ramen_tonkotsu', 'Tonkotsu Shio Clásico', 12.99); return false;">Añadir al Carrito</a>
                     </div>
                 </article>
 
                 <article class="dish-card" data-id="ramen_shoyu" data-name="Shoyu de Pollo" data-price="11.50">
-                    <div class="dish-image">
-                        <img src="assets/img/shoyu-ramen.jpg" alt="Ramen Shoyu" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-header">
-                            <h3>Shoyu de Pollo</h3>
-                            <span class="dish-price">$11.50</span>
-                        </div>
+                    <div class="dish-image"><img src="img/shoyu-ramen.jpg" alt="Ramen Shoyu"></div> <div class="dish-info">
+                        <div class="dish-header"><h3>Tantan Ramen</h3><span class="dish-price">$14.500</span></div>
                         <p class="dish-description">Caldo ligero a base de pollo y salsa de soja. Servido con bambú, cebollín y finas rebanadas de pechuga.</p>
-                        <a href="#" class="btn-add" 
-                           onclick="addToCart('ramen_shoyu', 'Shoyu de Pollo', 11.50); return false;">
-                           Añadir al Carrito
-                        </a>
+                        <a href="#" class="btn-add" onclick="addToCart('ramen_shoyu', 'Shoyu de Pollo', 11.50); return false;">Añadir al Carrito</a>
                     </div>
                 </article>
-
-                <article class="dish-card" data-id="ramen_miso" data-name="Spicy Miso Ramen" data-price="13.75">
-                    <div class="dish-image">
-                        <img src="assets/img/miso-ramen.jpg" alt="Ramen Miso" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
+                
+                <article class="dish-card" data-id="ramen_spicy" data-name="Tantanmen Picante" data-price="14.500">
+                    <div class="dish-image"><img src="img/tantanmen-ramen.jpg" alt="Tantanmen Picante"></div> 
                     <div class="dish-info">
-                        <div class="dish-header">
-                            <h3>Spicy Miso Ramen</h3>
-                            <span class="dish-price">$13.75</span>
-                        </div>
-                        <p class="dish-description">Caldo potente con pasta de miso fermentada y un toque picante de chile rojo. Ideal para el frío.</p>
-                        <a href="#" class="btn-add" 
-                           onclick="addToCart('ramen_miso', 'Spicy Miso Ramen', 13.75); return false;">
-                           Añadir al Carrito
-                        </a>
-                    </div>
-                </article>
-            </section>
-
-            <section class="menu-section">
-                <h2>🥢 Entrantes y Sides</h2>
-
-                <article class="dish-card" data-id="side_gyoza" data-name="Gyoza de Cerdo (6 uds.)" data-price="6.50">
-                    <div class="dish-image">
-                        <img src="assets/img/gyoza.jpg" alt="Gyoza de Cerdo" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-header">
-                            <h3>Gyoza de Cerdo y Col (6 uds.)</h3>
-                            <span class="dish-price">$6.50</span>
-                        </div>
-                        <p class="dish-description">Empanadillas japonesas perfectamente doradas, servidas con salsa ponzu de la casa.</p>
-                        <a href="#" class="btn-add" 
-                           onclick="addToCart('side_gyoza', 'Gyoza de Cerdo (6 uds.)', 6.50); return false;">
-                           Añadir al Carrito
-                        </a>
-                    </div>
-                </article>
-
-                <article class="dish-card" data-id="side_edamame" data-name="Edamame con Sal Marina" data-price="4.00">
-                    <div class="dish-image">
-                        <img src="assets/img/edamame.jpg" alt="Edamame" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-header">
-                            <h3>Edamame con Sal Marina</h3>
-                            <span class="dish-price">$4.00</span>
-                        </div>
-                        <p class="dish-description">Vainas de soja al vapor, el aperitivo saludable y tradicional. (Opcional: con toque de chile).</p>
-                        <a href="#" class="btn-add" 
-                           onclick="addToCart('side_edamame', 'Edamame con Sal Marina', 4.00); return false;">
-                           Añadir al Carrito
-                        </a>
+                        <div class="dish-header"><h3>Tantanmen Picante 🔥</h3><span class="dish-price">$14.500</span></div>
+                        <p class="dish-description">Caldo de miso picante, pollo y almeja con el toque de sésamo, pulpa de cerdo molido picante, karaage, ajitama, nori, cebollín, pebre, sésamo y noodles.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('ramen_spicy', 'Tantanmen Picante', 14.500); return false;">Añadir al Carrito</a>
                     </div>
                 </article>
 
             </section>
             
+            <section class="menu-section">
+                <h2>🌱 Opciones Veganas</h2>
+                
+                <article class="dish-card" data-id="ramen_vegano" data-name="Ramen Vegano Miso" data-price="12.99">
+                    <div class="dish-image"><img src="img/vegano-featured.jpg" alt="Ramen Vegano"></div>
+                    <div class="dish-info">
+                        <div class="dish-header"><h3>Ramen Vegano Miso</h3><span class="dish-price">$12.99</span></div>
+                        <p class="dish-description">Caldo de verduras con base de miso, tofu marinado y vegetales frescos de temporada. 100% plant-based.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('ramen_vegano', 'Ramen Vegano Miso', 12.99); return false;">Añadir al Carrito</a>
+                    </div>
+                </article>
+            </section>
+            
+            <section class="menu-section">
+                <h2>🥢 Entrantes y Sides</h2>
+                
+                <article class="dish-card" data-id="side_gyoza" data-name="Gyoza de Cerdo (6 uds.)" data-price="6.50">
+                    <div class="dish-image"><img src="img/gyoza-featured.jpg" alt="Gyoza de Cerdo"></div> <div class="dish-info">
+                        <div class="dish-header"><h3>Gyoza de Cerdo y Col (6 uds.)</h3><span class="dish-price">$6.50</span></div>
+                        <p class="dish-description">Empanadillas japonesas hechas a mano y perfectamente doradas, servidas con salsa ponzu de la casa.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('side_gyoza', 'Gyoza de Cerdo (6 uds.)', 6.50); return false;">Añadir al Carrito</a>
+                    </div>
+                </article>
+
+                <article class="dish-card" data-id="side_edamame" data-name="Edamame con Sal Marina" data-price="4.00">
+                    <div class="dish-image"><img src="img/edamame.jpg" alt="Edamame"></div> <div class="dish-info">
+                        <div class="dish-header"><h3>Edamame con Sal Marina</h3><span class="dish-price">$4.00</span></div>
+                        <p class="dish-description">Vainas de soja al vapor, el aperitivo saludable y tradicional.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('side_edamame', 'Edamame con Sal Marina', 4.00); return false;">Añadir al Carrito</a>
+                    </div>
+                </article>
+                
+                <article class="dish-card" data-id="side_karaage" data-name="Karaage (Pollo Frito Japonés)" data-price="7.99">
+                    <div class="dish-image"><img src="img/karaage.jpg" alt="Karaage"></div> 
+                    <div class="dish-info">
+                        <div class="dish-header"><h3>Pollo Karaage</h3><span class="dish-price">$7.99</span></div>
+                        <p class="dish-description">Muslos de pollo marinados en jengibre y soja, fritos hasta quedar crujientes. Servido con mayonesa japonesa.</p>
+                        <a href="#" class="btn-add" onclick="addToCart('side_karaage', 'Pollo Karaage', 7.99); return false;">Añadir al Carrito</a>
+                    </div>
+                </article>
+
+            </section>
         </div>
     </main>
 
@@ -218,17 +265,16 @@
                     name: name,
                     price: price,
                     quantity: 1,
-                    // URL de imagen simulada para el carrito
-                    imageURL: itemId.includes('ramen') ? 'assets/img/tonkotsu-ramen-mini.jpg' : 'assets/img/gyoza-mini.jpg' 
+                    // Se usa una URL de imagen genérica. ESTO DEBE SER AJUSTADO
+                    imageURL: 'img/placeholder-' + itemId + '.jpg' 
                 });
             }
 
             saveCartItems(items);
-            alert(`"${name}" ha sido añadido al carrito. Cantidad total: ${existingItem ? existingItem.quantity : 1}`);
+            alert(`"${name}" ha sido añadido al carrito.`);
         }
 
         document.addEventListener('DOMContentLoaded', updateCartCount);
     </script>
-
 </body>
 </html>

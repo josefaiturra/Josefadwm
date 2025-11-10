@@ -7,29 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ESTILOS CSS (Mismos que el menú y carrito anterior) */
+        /* ESTILOS CSS */
         :root {
-            --color-principal: #B31B1B;
-            --color-secundario: #2c3e50;
-            --color-acento: #FFD700;
-            --color-fondo: #f9f9f9;
+            --color-principal: #B31B1B; --color-secundario: #2c3e50; --color-acento: #FFD700; --color-fondo: #f9f9f9;
         }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-secundario);
-            line-height: 1.6;
-        }
-        
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: var(--color-fondo); color: var(--color-secundario); line-height: 1.6; }
         a { text-decoration: none; color: var(--color-principal); transition: color 0.3s; }
-
+        
         header { background-color: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; }
         .logo a { color: var(--color-principal); font-size: 2.2em; font-weight: 700; }
         nav ul { list-style: none; display: flex; padding: 0; margin: 0; }
-        nav ul li a { color: var(--color-secundario); padding: 10px 18px; font-weight: 500; text-transform: uppercase; }
         .user-actions a { color: var(--color-secundario); margin-left: 15px; font-size: 0.9em; }
 
         .cart-title { text-align: center; padding: 40px 20px 20px; }
@@ -44,44 +31,16 @@
         .item-image img { width: 100%; height: 100%; object-fit: cover; }
         .item-details { flex-grow: 1; }
         .item-details h3 { margin: 0 0 5px 0; font-size: 1.2em; color: var(--color-secundario); }
-        .item-details p { margin: 0; font-size: 0.9em; color: #888; }
 
         .item-actions { display: flex; align-items: center; gap: 10px; margin-left: 20px; flex-shrink: 0; }
         .item-actions input { width: 50px; padding: 5px; text-align: center; border: 1px solid #ccc; border-radius: 5px; }
-        
-        .item-price-total {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: var(--color-principal);
-            width: 80px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .btn-remove {
-            color: var(--color-principal);
-            font-size: 0.8em;
-            margin-top: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
+        .item-price-total { font-size: 1.2em; font-weight: 700; color: var(--color-principal); width: 80px; text-align: right; flex-shrink: 0; }
+        .btn-remove { color: var(--color-principal); font-size: 0.8em; margin-top: 5px; cursor: pointer; text-transform: uppercase; font-weight: 700; }
         
         .cart-summary h3 { font-family: 'Playfair Display', serif; color: var(--color-secundario); border-bottom: 2px solid var(--color-acento); padding-bottom: 10px; margin-top: 0; margin-bottom: 20px; }
         .summary-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1em; }
-        
-        .summary-total {
-            border-top: 2px solid var(--color-secundario);
-            padding-top: 15px;
-            margin-top: 15px;
-            font-size: 1.5em;
-            font-weight: 700;
-            color: var(--color-principal);
-        }
-
-        .btn-checkout { background-color: var(--color-acento); color: var(--color-secundario); padding: 15px 20px; border: none; border-radius: 5px; font-size: 1.2em; font-weight: 700; cursor: pointer; width: 100%; margin-top: 20px; transition: background-color 0.3s; }
-        .btn-checkout:hover { background-color: gold; }
-        .continue-shopping { text-align: center; margin-top: 20px; }
+        .summary-total { border-top: 2px solid var(--color-secundario); padding-top: 15px; margin-top: 15px; font-size: 1.5em; font-weight: 700; color: var(--color-principal); }
+        .btn-checkout { background-color: var(--color-acento); color: var(--color-secundario); padding: 15px 20px; border: none; border-radius: 5px; font-size: 1.2em; font-weight: 700; cursor: pointer; width: 100%; margin-top: 20px; }
         .empty-cart { text-align: center; padding: 100px 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); margin: 40px auto; max-width: 600px; }
     </style>
 </head>
@@ -111,43 +70,25 @@
         </section>
 
         <div class="cart-container">
-
             <section class="cart-items" id="cart-items-list">
                 </section>
             
             <aside class="cart-summary">
                 <h3>Resumen de la Compra</h3>
                 
-                <div class="summary-line">
-                    <span>Subtotal:</span>
-                    <span id="summary-subtotal">$0.00</span>
-                </div>
+                <div class="summary-line"><span>Subtotal:</span><span id="summary-subtotal">$0.00</span></div>
+                <div class="summary-line"><span>Descuentos:</span><span id="summary-discount" style="color: var(--color-principal); font-weight: 700;">-$0.00</span></div>
+                <div class="summary-line"><span>Costo de Envío:</span><span id="summary-shipping">$0.00</span></div>
                 
-                <div class="summary-line">
-                    <span>Descuentos:</span>
-                    <span id="summary-discount" style="color: var(--color-principal); font-weight: 700;">-$0.00</span>
-                </div>
-                
-                <div class="summary-line">
-                    <span>Costo de Envío:</span>
-                    <span id="summary-shipping">$0.00</span>
-                </div>
-                
-                <div class="summary-total summary-line">
-                    <span>TOTAL A PAGAR:</span>
-                    <span id="summary-total">$0.00</span>
-                </div>
+                <div class="summary-total summary-line"><span>TOTAL A PAGAR:</span><span id="summary-total">$0.00</span></div>
 
                 <a href="checkout.html" class="btn-checkout">IR A PAGAR</a>
                 
-                <p style="font-size: 0.85em; text-align: center; margin-top: 15px; color: #888;">
-                    Impuestos y tasas incluidos.
-                </p>
-                
+                <p style="font-size: 0.85em; text-align: center; margin-top: 15px; color: #888;">Impuestos y tasas incluidos.</p>
             </aside>
         </div>
     </main>
-
+    
     <script>
         // CÓDIGO CENTRAL: Función compartida para leer/escribir/contar
         function getCartItems() {
@@ -169,33 +110,19 @@
             }
         }
         
-        // La función addToCart() no es necesaria en el carrito, pero se incluye en el otro archivo.
-
-        // =================================================================
-        // LÓGICA ESPECÍFICA DE LA PÁGINA CARRITO.HTML
-        // =================================================================
-
+        // LÓGICA ESPECÍFICA DEL CARRITO
         const SHIPPING_COST = 4.00; 
         const DISCOUNT_AMOUNT = 2.00;
 
-        // 1. Dibuja el carrito, calcula totales y actualiza el resumen
         function renderCart() {
             const items = getCartItems();
             const cartList = document.getElementById('cart-items-list');
             let subtotal = 0;
             
-            cartList.innerHTML = ''; // Limpiar
+            cartList.innerHTML = '';
 
             if (items.length === 0) {
-                // Mostrar mensaje de carrito vacío
-                cartList.innerHTML = `
-                    <div class="empty-cart">
-                        <h2>🍜 Tu Carrito está Vacío</h2>
-                        <p>¡Explora nuestro menú para encontrar el ramen perfecto!</p>
-                        <a href="menu.html" class="btn-checkout" style="width: 50%; display: inline-block; margin-top: 20px;">Ver Menú</a>
-                    </div>
-                `;
-                // Ocultar el resumen
+                cartList.innerHTML = `<div class="empty-cart"><h2>🍜 Tu Carrito está Vacío</h2><p>¡Explora nuestro menú para encontrar el ramen perfecto!</p><a href="menu.html" class="btn-checkout" style="width: 50%; display: inline-block; margin-top: 20px;">Ver Menú</a></div>`;
                 document.querySelector('.cart-summary').style.display = 'none';
                 return;
             }
@@ -206,23 +133,7 @@
             items.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 subtotal += itemTotal;
-
-                const itemHtml = `
-                    <article class="item-card" data-item-id="${item.id}">
-                        <div class="item-image"><img src="${item.imageURL || 'assets/img/default-mini.jpg'}" alt="${item.name}"></div>
-                        <div class="item-details">
-                            <h3>${item.name}</h3>
-                            <p>Precio unitario: $${item.price.toFixed(2)}</p>
-                        </div>
-                        <div class="item-actions">
-                            <label for="qty-${item.id}">Cant:</label>
-                            <input type="number" id="qty-${item.id}" value="${item.quantity}" min="1" 
-                                   onchange="updateItemQuantity('${item.id}', this.value)">
-                        </div>
-                        <div class="item-price-total">$${itemTotal.toFixed(2)}</div>
-                        <a href="#" class="btn-remove" onclick="removeItem('${item.id}'); return false;">Eliminar</a>
-                    </article>
-                `;
+                const itemHtml = `<article class="item-card" data-item-id="${item.id}"><div class="item-image"><img src="${item.imageURL || 'assets/img/default-mini.jpg'}" alt="${item.name}"></div><div class="item-details"><h3>${item.name}</h3><p>Precio unitario: $${item.price.toFixed(2)}</p></div><div class="item-actions"><label for="qty-${item.id}">Cant:</label><input type="number" id="qty-${item.id}" value="${item.quantity}" min="1" onchange="updateItemQuantity('${item.id}', this.value)"></div><div class="item-price-total">$${itemTotal.toFixed(2)}</div><a href="#" class="btn-remove" onclick="removeItem('${item.id}'); return false;">Eliminar</a></article>`;
                 cartList.innerHTML += itemHtml;
             });
 
@@ -240,7 +151,6 @@
             updateCartCount();
         }
 
-        // 2. Actualizar la cantidad de un producto específico
         function updateItemQuantity(itemId, newQuantity) {
             let items = getCartItems();
             const itemIndex = items.findIndex(item => item.id === itemId);
@@ -250,25 +160,19 @@
                 items[itemIndex].quantity = quantity;
             }
             
-            // Si es menor a 1, la función removeItem se encargará al recalcular.
             saveCartItems(items);
-            renderCart(); // Redibujar y recalcular
+            renderCart();
         }
 
-        // 3. Eliminar un producto
         function removeItem(itemId) {
             let items = getCartItems();
-            // Filtra el array para excluir el item con ese ID
             items = items.filter(item => item.id !== itemId);
             
             saveCartItems(items);
-            renderCart(); // Redibujar y recalcular
+            renderCart();
         }
 
-
-        // Llamada inicial al cargar la página
         document.addEventListener('DOMContentLoaded', renderCart);
     </script>
-
 </body>
 </html>

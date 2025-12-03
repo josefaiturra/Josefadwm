@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - TokyoNoodles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-principal: #B31B1B;
+            --color-secundario: #2c3e50;
+            --color-acento: #FFD700;
+            --color-fondo: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-secundario);
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* NAVBAR GENERAL (público) */
+        header {
+            background:white;
+            box-shadow:0 2px 6px rgba(0,0,0,.1);
+            padding:10px 25px;
+        }
+        .nav-inner {
+            max-width:1200px;
+            margin:auto;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            gap:16px;
+        }
+        .logo a {
+            color:var(--color-principal);
+            font-size:2rem;
+            font-weight:700;
+            letter-spacing:-1px;
+        }
+        nav ul {
+            list-style:none;
+            padding:0;
+            margin:0;
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+        nav a {
+            color:var(--color-secundario);
+            font-weight:500;
+            padding:6px 10px;
+        }
+        nav a:hover {
+            color:var(--color-principal);
+        }
+
+        .user-actions a {
+            color:var(--color-secundario);
+            margin-left:12px;
+            font-size:.9rem;
+        }
+
+        /* HEADER ADMIN */
+        .admin-header {
+            background-color: var(--color-secundario);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logout a {
+            background-color: var(--color-principal);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* SIDEBAR */
+        .admin-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px;
+            color: white;
+        }
+        .sidebar h3 { color: var(--color-acento); }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li a {
+            display: block;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            color: white;
+            transition: background-color .3s;
+        }
+        .sidebar ul li a.active,
+        .sidebar ul li a:hover {
+            background-color: var(--color-principal);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .stat-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 2.3em;
+            color: var(--color-principal);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ NAVBAR global -->
+    <header>
+        <div class="nav-inner">
+            <div class="logo"><a href="index.html">TokyoNoodles</a></div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="menu.html">Menú</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-actions">
+                <div id="authArea"></div>
+                <a href="carrito.html">🛒 Carrito</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ✅ HEADER ADMIN -->
+    <div class="admin-header">
+        <h1>Panel de Administración - TokyoNoodles</h1>
+    </div>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h3>Dashboard</h3>
+            <ul>
+                <li><a href="admin.html" class="active">📊 Visión General</a></li>
+                <li><a href="productos_admin.html">🍜 Gestión de Productos</a></li>
+                <li><a href="usuarios_admin.html">👤 Gestión de Usuarios</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <h2>Resumen General</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Ventas Totales</h3>
+                    <div class="value">$0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Pedidos Nuevos</h3>
+                    <div class="value">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Plato Más Vendido</h3>
+                    <div class="value">-</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>

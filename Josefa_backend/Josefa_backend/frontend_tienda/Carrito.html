@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras - TokyoNoodles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --color-principal:#B31B1B; --color-secundario:#2c3e50; --color-acento:#FFD700; --color-fondo:#f9f9f9; }
+
+    /* ===== Layout base ===== */
+    body { font-family:'Roboto',sans-serif; margin:0; background:var(--color-fondo); color:var(--color-secundario); line-height:1.6; }
+    a { text-decoration:none; color:var(--color-principal); }
+
+    /* ===== Header robusto ===== */
+    header {
+      background:#fff;
+      box-shadow:0 2px 8px rgba(0,0,0,.1);
+      padding:10px 20px;
+    }
+    .header-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap; /* evita que se rompa en pantallas chicas */
+      min-height:64px;
+    }
+    .logo a { color:var(--color-principal); font-size:2rem; font-weight:700; letter-spacing:-.5px; }
+    nav ul { list-style:none; display:flex; gap:14px; padding:0; margin:0; flex-wrap:wrap; }
+    nav a { color:var(--color-secundario); font-weight:500; }
+    .user-actions{
+      display:flex; align-items:center; gap:12px; margin-left:auto;
+      color:var(--color-secundario); font-size:.95rem;
+    }
+    .badge {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:22px; height:22px; padding:0 6px; border-radius:11px;
+      background:var(--color-principal); color:#fff; font-size:.8rem; font-weight:700;
+    }
+
+    /* ===== Carrito ===== */
+    .cart-title { text-align:center; padding:40px 20px 20px; }
+    .cart-title h1 { font-family:'Playfair Display',serif; font-size:2.4rem; margin:0 0 6px; }
+
+    .cart-container { max-width:1200px; margin:0 auto 60px; padding:0 20px; display:flex; gap:30px; }
+    .cart-items { flex:2; }
+    .cart-summary { flex:1; background:#fff; padding:24px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.05); height:fit-content; }
+
+    .item-card { display:flex; background:#fff; padding:15px; border-radius:8px; margin-bottom:15px; box-shadow:0 2px 5px rgba(0,0,0,.05); align-items:center; }
+    .item-image { width:80px; height:80px; overflow:hidden; border-radius:5px; flex-shrink:0; margin-right:15px; }
+    .item-image img { width:100%; height:100%; object-fit:cover; }
+    .item-details { flex:1; min-width:0; }
+    .item-details h3 { margin:0 0 5px; font-size:1.05rem; }
+    .item-actions { display:flex; align-items:center; gap:10px; margin-left:20px; }
+    .item-actions input { width:56px; padding:6px; text-align:center; border:1px solid #ccc; border-radius:6px; }
+    .item-price-total { font-size:1.1rem; font-weight:700; color:var(--color-principal); width:100px; text-align:right; }
+    .btn-remove { color:var(--color-principal); font-size:.8rem; cursor:pointer; text-transform:uppercase; font-weight:700; background:none; border:0; }
+
+    .cart-summary h3 { font-family:'Playfair Display',serif; border-bottom:2px solid var(--color-acento); padding-bottom:10px; margin:0 0 18px; }
+    .summary-line { display:flex; justify-content:space-between; margin-bottom:10px; }
+    .summary-total { border-top:2px solid var(--color-secundario); padding-top:15px; margin-top:15px; font-size:1.4rem; font-weight:700; color:var(--color-principal); }
+    .btn-checkout {
+      background:var(--color-acento); color:var(--color-secundario);
+      padding:14px 18px; border:0; border-radius:6px; font-size:1.1rem; font-weight:700;
+      display:block; text-align:center; width:100%; margin-top:16px;
+    }
+    .empty-cart { text-align:center; padding:80px 20px; background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.05); margin:40px auto; max-width:600px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo"><a href="index.html">TokyoNoodles</a></div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="menu.html">Menú</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="user-actions">
+        <div id="authArea"></div>
+        <a href="carrito.html" aria-label="Carrito">🛒 <span class="badge" id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="cart-title">
+      <h1>Tu Carrito de TokyoNoodles</h1>
+      <p>¡Casi listo para disfrutar el mejor ramen!</p>
+    </section>
+
+    <div class="cart-container">
+      <section class="cart-items" id="cart-items-list"></section>
+
+      <aside class="cart-summary">
+        <h3>Resumen de la Compra</h3>
+        <div class="summary-line"><span>Subtotal:</span><span id="summary-subtotal">$0</span></div>
+        <div class="summary-line"><span>Descuentos:</span><span id="summary-discount">$0</span></div>
+        <div class="summary-line"><span>Costo de Envío:</span><span id="summary-shipping">$0</span></div>
+        <div class="summary-total summary-line"><span>TOTAL A PAGAR:</span><span id="summary-total">$0</span></div>
+        <a href="checkout.html" class="btn-checkout">IR A PAGAR</a>
+        <p style="font-size:.85em; text-align:center; margin-top:15px; color:#888;">Impuestos y tasas incluidos.</p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Nada inline: evitamos CSP y choques -->
+  <script src="js/auth.js" defer></script>
+  <script src="js/carrito.js" defer></script>
+</body>
+</html>

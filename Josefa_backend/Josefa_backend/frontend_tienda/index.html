@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokyoNoodles - Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ESTILOS GENERALES Y PALETA */
+        :root {
+            --color-principal: #B31B1B;       /* Rojo Oscuro (Marca/Destacado) */
+            --color-secundario: #2c3e50;      /* Gris Oscuro (Texto principal) */
+            --color-acento: #FFD700;          /* Amarillo Oro (Fideos/Acentos) */
+            --color-fondo: #f9f9f9;
+        }
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: var(--color-fondo); color: var(--color-secundario); line-height: 1.6; }
+        a { text-decoration: none; color: var(--color-principal); transition: color 0.3s; }
+        a:hover { color: var(--color-secundario); } 
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* HEADER */
+        header { 
+            background-color: white; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            padding: 10px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; top: 0; 
+            z-index: 1000; 
+        }
+        .logo a { color: var(--color-principal); font-size: 2.2em; font-weight: 700; letter-spacing: -1px; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
+        nav ul li a { color: var(--color-secundario); padding: 10px 18px; font-weight: 500; text-transform: uppercase; font-size: 0.9em; }
+        .user-actions a { color: var(--color-secundario); margin-left: 15px; font-size: 0.9em; }
+        .user-actions a:hover { color: var(--color-principal); }
+        .current-page { 
+            border-bottom: 3px solid var(--color-principal) !important; 
+            color: var(--color-principal) !important;
+        }
+
+        /* HERO SECTION */
+        .hero { 
+            color: white; 
+            text-align: center; 
+            padding: 120px 20px; 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+        } 
+        .hero h1 { font-size: 3.8em; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); }
+        .hero p { font-size: 1.4em; margin-bottom: 30px; }
+        .btn-menu { 
+            background-color: var(--color-acento); color: var(--color-secundario); padding: 15px 30px; font-weight: 700; border-radius: 5px; font-size: 1.1em; display: inline-block; border: none; cursor: pointer; transition: all 0.3s; 
+        }
+        .btn-menu:hover { background-color: gold; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); } 
+
+        /* CONTENT SECTIONS */
+        .content-section { padding: 60px 20px; max-width: 1200px; margin: auto; text-align: center; }
+        .content-section h2 { font-size: 2.5em; color: var(--color-principal); margin-bottom: 40px; border-bottom: 3px solid var(--color-acento); display: inline-block; padding-bottom: 5px; }
+        
+        /* GRID DE FAVORITOS */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+            margin-top: 30px; 
+            justify-content: center; 
+        }
+        .card { 
+            background-color: white; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .card-content h3 { color: var(--color-secundario); margin-top: 0; }
+        
+        /* SECCIÓN EXPERIENCIA/HISTORIA */
+        .experiencia-section {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .experiencia-img {
+            flex: 0 0 40%; 
+            max-width: 40%;
+            padding-right: 40px;
+        }
+        .experiencia-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .experiencia-text {
+            flex: 1;
+        }
+        .experiencia-text h2 {
+            text-align: left;
+            margin-top: 0;
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 20px;
+        }
+        .experiencia-text p {
+            margin-bottom: 20px;
+        }
+
+        /* CTA PRODUCTOS */
+        .cta-productos {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .cta-productos h2 {
+            color: white;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            border: none;
+        }
+        .cta-productos p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .btn-productos {
+            background-color: var(--color-acento);
+            color: var(--color-secundario);
+            padding: 18px 35px;
+            font-weight: 700;
+            border-radius: 5px;
+            font-size: 1.2em;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-productos:hover {
+            background-color: gold;
+            transform: scale(1.05);
+        }
+        
+        /* FOOTER */
+        footer { background-color: var(--color-secundario); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; }
+        footer a { color: white; opacity: 0.7; margin: 0 10px; }
+        footer a:hover { opacity: 1; } 
+
+        /* Media Queries para Responsiveness */
+        @media (max-width: 900px) {
+            .experiencia-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .experiencia-img, .experiencia-text {
+                flex: 1 1 100%;
+                max-width: 100%;
+                padding: 0;
+            }
+            .experiencia-img {
+                margin-bottom: 30px;
+            }
+            .experiencia-img img {
+                height: 300px;
+            }
+            .experiencia-text h2 {
+                text-align: center;
+            }
+        }
+        @media (max-width: 600px) {
+            header { padding: 10px 20px; }
+            nav { display: none; } 
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="index.html">TokyoNoodles</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="current-page">Inicio</a></li> 
+                <li><a href="menu.html">Pide Aquí</a></li>
+                <li><a href="ubicacion.html">ubicación</a></li>
+            </ul>
+        </nav>
+            <div class="user-actions">
+            <div id="authArea" style="display:inline-block;"></div>
+            <a href="carrito.html">🛒 Carrito (<span id="cart-count">0</span>)</a>
+            </div>
+    </header>
+
+    <main>
+        <section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/ramen2.jpg');">
+            <h1>Siente el Umami. Siente Tokyo.</h1>
+            <p>Ramen artesanal, preparado con caldos de cocción lenta y los ingredientes más frescos.</p>
+            <a href="menu.html" class="btn-menu">Explora Nuestro Menú</a>
+        </section>
+
+        <section class="content-section">
+            <h2>Nuestros Favoritos de la Casa</h2>
+            
+            <div class="grid-container">
+                <article class="card">
+                    <img src="img/ramen3.jpg" alt="Ramen Tonkotsu">
+                    <div class="card-content">
+                        <h3>Tonkotsu Cremoso</h3>
+                        <p>El caldo de cerdo más vendido, denso y sabroso. Una tradición de 18 horas de cocción.</p>
+                        <a href="menu.html">Ver Plato</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="img/gyosas1.jpg" alt="Gyoza de Cerdo">
+                    <div class="card-content">
+                        <h3>Gyoza de Cerdo Crujiente</h3>
+                        <p>Empanadillas japonesas hechas a mano, el acompañamiento perfecto para tu ramen.</p>
+                        <a href="menu.html">Pedir Ahora</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="img/ramen4.jpg" alt="Ramen Vegano">
+                    <div class="card-content">
+                        <h3>Ramen Vegano Miso</h3>
+                        <p>Un caldo de verduras con base de miso, sorprendente en sabor y profundidad. 100% plant-based.</p>
+                        <a href="menu.html">Opción Veggie</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="experiencia-section">
+            <div class="experiencia-img">
+                <img src="img/ramen5.jpg" alt="Chef preparando ramen con dedicación"> 
+            </div>
+            <div class="experiencia-text">
+                <h2>El Sabor de Tres Generaciones</h2>
+                <p>Nuestra historia comenzó en 1985 en un pequeño callejón de Shinjuku, Tokyo. Desde entonces, hemos mantenido la receta original de nuestro abuelo: ingredientes simples, caldos complejos y amor por el detalle.</p>
+                <p>Cada tazón de ramen en TokyoNoodles es un viaje directo a las calles de Japón. Usamos solo fideos hechos a mano y cocinamos nuestros caldos a fuego lento durante días para lograr el **máximo *umami***.</p>
+                <a href="historia.html" class="btn-menu">Conoce Nuestra Historia</a>
+            </div>
+        </section>
+
+        <section class="cta-productos">
+            <h2>Lleva el Sabor a Casa</h2>
+            <p>¿Quieres recrear la experiencia? Descubre nuestros kits de ramen, salsas secretas y tazones japoneses exclusivos.</p>
+            <a href="menu.html" class="btn-productos">Ver Productos de la Tienda</a>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TokyoNoodles. Todos los derechos reservados.</p>
+        <div>
+            <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Admin</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Función para obtener los ítems del Local Storage
+        function getCartItems() {
+            const items = localStorage.getItem('tokyoNoodlesCart');
+            return items ? JSON.parse(items) : [];
+        }
+
+        // Función para guardar los ítems en el Local Storage
+        function saveCartItems(items) {
+            localStorage.setItem('tokyoNoodlesCart', JSON.stringify(items));
+            updateCartCount();
+        }
+
+        // Función para actualizar el contador del carrito en el header (CLAVE)
+        function updateCartCount() {
+            const items = getCartItems();
+            const count = items.reduce((total, item) => total + item.quantity, 0);
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+            }
+        }
+
+        // Esta función NO añade un producto desde el index, pero es necesaria para que el localStorage se inicie correctamente.
+        function addToCart(itemId, name, price) {
+             let items = getCartItems();
+            const existingItem = items.find(item => item.id === itemId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                items.push({
+                    id: itemId,
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    // URL de imagen simulada para el carrito (ajusta estas URLs)
+                    imageURL: itemId.includes('ramen') ? 'img/placeholder-ramen.jpg' : 'img/placeholder-gyoza.jpg' 
+                });
+            }
+
+            saveCartItems(items);
+            alert(`"${name}" ha sido añadido al carrito.`);
+        }
+
+        // Ejecutar al cargar la página para que el contador muestre el número correcto
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+
+<script src="js/auth.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", initAuthUI);
+</script>
+<script src="js/carrito.js" defer></script>
+
+
+</body>
+</html>

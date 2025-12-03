@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Productos - TokyoNoodles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--color-principal:#B31B1B;--color-secundario:#2c3e50;--color-acento:#FFD700;--color-fondo:#f4f4f4}
+    body{font-family:'Roboto',sans-serif;margin:0;background:var(--color-fondo)}
+    /* NAVBAR global */
+    header{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.1);padding:10px 25px}
+    .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .logo a{color:var(--color-principal);font-size:2rem;font-weight:700;letter-spacing:-1px;text-decoration:none}
+    nav ul{list-style:none;padding:0;margin:0;display:flex;gap:15px;flex-wrap:wrap}
+    nav a{color:var(--color-secundario);font-weight:500;padding:6px 10px;text-decoration:none}
+    nav a:hover{color:var(--color-principal)}
+    .user-actions a{color:var(--color-secundario);margin-left:12px;font-size:.9rem;text-decoration:none}
+
+    /* HEADER Admin */
+    .admin-header{background:var(--color-secundario);color:#fff;padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+    .logout a{background:var(--color-principal);padding:8px 15px;color:#fff;border-radius:5px;text-decoration:none}
+
+    /* LAYOUT */
+    .admin-container{display:flex;min-height:calc(100vh - 70px)}
+    .sidebar{width:250px;background:#34495e;padding:20px;color:#fff}
+    .sidebar h3{color:var(--color-acento)}
+    .sidebar ul{list-style:none;padding:0;margin:0}
+    .sidebar ul li a{display:block;padding:12px 15px;color:#fff;margin-bottom:5px;border-radius:5px;text-decoration:none}
+    .sidebar ul li a:hover,.sidebar ul li a.active{background:var(--color-principal)}
+    .main-content{flex-grow:1;padding:40px}
+    h1{color:var(--color-principal);margin-top:0}
+
+    /* TABLE */
+    .table{background:#fff;padding:20px;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+    table{width:100%;border-collapse:collapse;margin-top:15px}
+    th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}
+    th{background:#eee}
+
+    /* BTNS */
+    .btn{padding:10px 15px;border-radius:5px;border:0;cursor:pointer}
+    .btn-add{background:var(--color-principal);color:#fff;font-weight:700}
+    .btn-edit{background:#3498db;color:#fff}
+    .btn-delete{background:#e63946;color:#fff}
+    .btn-add:hover{background:#8a1515}.btn-edit:hover{background:#217dbb}.btn-delete:hover{background:#c32734}
+
+    /* MODAL */
+    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;justify-content:center;align-items:center;z-index:1000}
+    .modal-box{background:#fff;padding:24px;width:420px;max-width:92vw;border-radius:10px;box-shadow:0 0 20px rgba(0,0,0,.2)}
+    .modal-box h2{margin:0 0 15px;color:var(--color-secundario)}
+    .form-row{display:flex;gap:12px}
+    .form-row > div{flex:1}
+    .modal-box label{display:block;font-size:.9em;color:#516270;margin:8px 0 6px}
+    .modal-box input,.modal-box textarea,.modal-box select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;font:inherit}
+    .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+  </style>
+</head>
+<body>
+
+  <!-- ✅ NAVBAR global -->
+  <header>
+    <div class="nav-inner">
+      <div class="logo"><a href="index.html">TokyoNoodles</a></div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="menu.html">Menú</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="user-actions">
+        <div id="authArea"></div>
+        <a href="carrito.html">🛒 Carrito</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HEADER ADMIN -->
+  <div class="admin-header">
+    <h1>Panel de Administración - TokyoNoodles</h1>
+  </div>
+
+  <div class="admin-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Dashboard</h3>
+      <ul>
+        <li><a href="admin.html">📊 Visión General</a></li>
+        <li><a href="productos_admin.html" class="active">🍜 Gestión de Productos</a></li>
+        <li><a href="usuarios_admin.html">👤 Gestión de Usuarios</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <h1>🍜 Gestión de Productos</h1>
+      <div class="table">
+        <button class="btn btn-add" id="openModalBtn">+ Añadir Producto</button>
+        <table aria-label="Tabla de productos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Imagen</th>
+              <th style="width:180px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="productsTable">
+            <!-- render JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL CREAR/EDITAR PRODUCTO -->
+  <div class="modal-bg" id="modal">
+    <div class="modal-box">
+      <h2 id="modalTitle">Crear Producto</h2>
+
+      <input type="hidden" id="pId" />
+      <label for="pName">Nombre del producto</label>
+      <input type="text" id="pName" placeholder="Ej: Tantanmen Picante">
+
+      <div class="form-row">
+        <div>
+          <label for="pPrice">Precio (CLP)</label>
+          <input type="number" id="pPrice" placeholder="14500" min="0" step="1">
+        </div>
+        <div>
+          <label for="pCat">Categoría</label>
+          <select id="pCat">
+            <option value="">Seleccionar…</option>
+            <option value="ramen">ramen</option>
+            <option value="side">side</option>
+            <option value="vegan">vegan</option>
+            <option value="otros">otros</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="pDesc">Descripción</label>
+      <textarea id="pDesc" rows="3" placeholder="Caldo miso picante, pollo y almeja con sésamo…"></textarea>
+
+      <label for="pImg">URL de imagen</label>
+      <input type="text" id="pImg" placeholder="img/tantanmen-ramen.jpg">
+
+      <div class="modal-actions">
+        <button class="btn btn-delete" id="closeModalBtn">Cancelar</button>
+        <button class="btn btn-add" id="saveProductBtn">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js" defer></script>
+  <script src="js/admin_products.js" defer></script>
+</body>
+</html>
